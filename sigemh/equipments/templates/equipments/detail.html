@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <a href="{% url 'equipments:create_equipment' object.pk %}" class="btn btn-primary">Adicionar {{ object.name|lower }} </a>
+    <h4>{{ object }}</h4>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Patrimônio</th>
+            <th>Número de Série</th>
+            <th>Setor</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for obj in object.equipments.all %}
+            <tr>
+                <td>{{ obj.serial_number }}</td>
+                <td>{{ obj.patrimony }}</td>
+                <td>{{ obj.sector|default:"-" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

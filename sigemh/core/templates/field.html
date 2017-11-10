@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+
+<div class="{% if field.errors %}has-error{% endif %}">
+  <label for="{{ field.id_for_label }}" class="control-label">
+    {{ field.label }}{% if field.field.required %}*{% endif %}
+  </label>
+  {% render_field field class="form-control" %}
+  {% include "field_error.html" with field=field %}
+  {% include "field_helptext.html" with field=field %}
+</div>

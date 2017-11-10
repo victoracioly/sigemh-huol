@@ -1,0 +1,4 @@
+-r requirements.txt
+ipython[notebook]
+model-mommy==1.4.0
+Fabric3==1.13.1.post1

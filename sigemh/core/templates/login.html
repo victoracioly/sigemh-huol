@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+
+{% block body %}
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Autenticação de usuário</h3>
+      </div>
+      <div class="panel-body">
+        <form method="POST">
+          {% csrf_token %}
+          {% include "form_error.html" %}
+
+          <div class="form-group">{% include "field.html" with field=form.username %}</div>
+          <div class="form-group">{% include "field.html" with field=form.password %}</div>
+
+          <p class="text-muted">*Campos obrigatórios</p>
+          <p><button type="submit" class="btn btn-primary">Entrar</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

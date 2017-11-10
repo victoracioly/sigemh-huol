@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <a href="{% url 'sectors:create' %}" class="btn btn-primary">Novo setor</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in object_list %}
+        <tr>
+          <td>{{ obj.name }}</td>
+            <td><a href="{% url 'sectors:delete' obj.pk %}">Excluir</a></td>
+          <td><a href="{% url 'sectors:update' obj.pk %}">Editar</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+
+{% block content %}
+  <div class="col-md-4 col-md-offset-4">
+    <form method="POST">
+      {% csrf_token %}
+      {% include "form_error.html" %}
+
+      <div class="form-group">{% include "field.html" with field=form.username %}</div>
+      <div class="form-group">{% include "field.html" with field=form.password %}</div>
+      <div class="form-group">{% include "field.html" with field=form.password1 %}</div>
+
+      <p class="text-muted">* Campos obrigatórios</p>
+      <p><button type="submit" class="btn btn-primary">Cadastrar</button></p>
+      <p class="text-muted">Já possui cadastro? <a href="{% url 'login' %}">Acessar</a></p>
+    </form>
+  </div>
+{% endblock content %}
