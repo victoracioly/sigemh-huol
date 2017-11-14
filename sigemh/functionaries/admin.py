@@ -1,3 +1,8 @@
 from django.contrib import admin
+from sigemh.functionaries.models import Functionary
 
-# Register your models here.
+
+@admin.register(Functionary)
+class FunctionaryAdmin(admin.ModelAdmin):
+
+    pass

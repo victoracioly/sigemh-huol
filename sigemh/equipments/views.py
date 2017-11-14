@@ -73,3 +73,5 @@ class EquipmentCreateView(BaseView,CreateView,DetailView):
         return get_object_or_404(models.EquipmentType.objects.all(), pk=self.kwargs['pk'])
 
 equipment_create = EquipmentCreateView.as_view()
+
+

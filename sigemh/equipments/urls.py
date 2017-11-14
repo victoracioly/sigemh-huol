@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^novo/$', equipment_type_create, name='create'),
     url(r'^(?P<pk>\d+)/editar/$', equipment_type_update, name='update'),
     url(r'^(?P<pk>\d+)/novo/$', equipment_create, name='create_equipment'),
-    url(r'^(?P<pk>\d+)/deletar/$', equipment_type_delete, name='create_equipment'),
+    url(r'^(?P<pk>\d+)/deletar/$', equipment_type_delete, name='delete'),
     url(r'^(?P<slug>[\w-]+)/$', equipment_type_detail, name='detail'),
 
 ]
