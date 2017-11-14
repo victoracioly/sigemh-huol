@@ -75,3 +75,15 @@ class EquipmentCreateView(BaseView,CreateView,DetailView):
 equipment_create = EquipmentCreateView.as_view()
 
 
+class EquipmentChangeSectorView(BaseView,UpdateView):
+
+    model = models.Equipment
+    fields = ['sector']
+    template_name = 'equipments/change_sector.html'
+
+    #Como a gente precisa passar o slug como parâmetro o sucess_url não funciona.
+    def get_success_url(self):
+        return reverse_lazy('equipments:detail',args=[self.object.equipment_type.slug])
+
+
+equipment_change_sector = EquipmentChangeSectorView.as_view()
