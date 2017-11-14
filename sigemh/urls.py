@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^equipamentos/', include('sigemh.equipments.urls', namespace='equipments')),
     url(r'^setores/', include('sigemh.sectors.urls', namespace='sectors')),
+    url(r'^funcionarios/', include('sigemh.functionaries.urls', namespace='functionaries')),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': settings.LOGIN_URL}, name='logout'),
     url(r'^admin/', admin.site.urls),

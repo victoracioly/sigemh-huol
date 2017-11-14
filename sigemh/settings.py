@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'sigemh.core',
     'sigemh.equipments',
     'sigemh.sectors',
+    'sigemh.functionaries',
 ]
 
 MIDDLEWARE = [

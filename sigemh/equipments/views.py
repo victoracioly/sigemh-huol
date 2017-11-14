@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 from sigemh.core.views import BaseView
 from sigemh.equipments import models
 
@@ -49,6 +50,13 @@ class EquipmentTypeUpdateView(EquipmentTypeBaseView, UpdateView):
 
 
 equipment_type_update = EquipmentTypeUpdateView.as_view()
+
+class EquipmentTypeDeleteView(EquipmentTypeBaseView,DeleteView):
+    model = models.EquipmentType
+    template_name = 'equipments/delete.html'
+    success_url = reverse_lazy('equipments:list')
+equipment_type_delete = EquipmentTypeDeleteView.as_view()
+
 
 #--------------------------------Criando os equipamentos
 
