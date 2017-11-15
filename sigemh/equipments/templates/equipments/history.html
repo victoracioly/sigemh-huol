@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h4>{{ object.equipment_type.name }} - Patrimônio: {{ object.patrimony }}</h4>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Setor</th>
+            <th>Dia/Hora - Chegada</th>
+            <th>Dia/Hora - Saída</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for history in object.get_history %}
+        <tr>
+            <td>{{ history.sector }}</td>
+            <td>{{ history.checkin|date:'d/m/Y H:i' }}</td>
+            <td>{{ history.checkout|date:'d/m/Y H:i'|default:'--/--/---- --:--' }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

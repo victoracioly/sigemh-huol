@@ -35,5 +35,17 @@ class Equipment(ModelBase):
     serial_number = models.CharField(verbose_name='Número de série', max_length=75, unique=True)
     sector = models.ForeignKey(Sector, verbose_name='Setor', null=True, blank=True)
 
+    #Ordenando de forma correta:
+    def get_history(self):
+        return self.history.all().order_by('-id')
+
     def __str__(self):
         return '{} - {}'.format(self.equipment_type.name, self.patrimony)
+
+class EquipmentHistory(ModelBase):
+    equipment = models.ForeignKey(Equipment,verbose_name='Equipamento',related_name='history')
+    sector = models.ForeignKey(Sector, verbose_name='Setor')
+    checkin = models.DateTimeField(verbose_name='Dia/Hora - Chegada',auto_now_add=True)
+    checkout = models.DateTimeField(verbose_name='Dia/Hora - Saída', null=True, blank=True)
+
+

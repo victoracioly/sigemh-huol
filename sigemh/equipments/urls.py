@@ -6,6 +6,8 @@ from sigemh.equipments.views import equipment_type_detail
 from sigemh.equipments.views import equipment_type_update
 from sigemh.equipments.views import equipment_type_delete
 from sigemh.equipments.views import equipment_change_sector
+from sigemh.equipments.views import equipment_history
+
 
 
 urlpatterns = [
@@ -15,6 +17,7 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/novo/$', equipment_create, name='create_equipment'),
     url(r'^(?P<pk>\d+)/deletar/$', equipment_type_delete, name='delete'),
     url(r'^(?P<pk>\d+)/editar-setor/$', equipment_change_sector, name='change_sector'),
+    url(r'^(?P<pk>\d+)/historico/$', equipment_history, name='history'),
     url(r'^(?P<slug>[\w-]+)/$', equipment_type_detail, name='detail'),
 
 ]

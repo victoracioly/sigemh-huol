@@ -6,6 +6,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from sigemh.core.views import BaseView
 from sigemh.equipments import models
+from django.shortcuts import render
 
 # Este método lista todos os objetos que eu tenho no banco que foram passados pelo modelo EquipmentType
 # Iniciamos com a listagem em texto, depois criamos as classes.
@@ -81,9 +82,51 @@ class EquipmentChangeSectorView(BaseView,UpdateView):
     fields = ['sector']
     template_name = 'equipments/change_sector.html'
 
+    def form_valid(self, form):
+        from datetime import datetime
+
+        last_history = self.object.history.last()
+
+        if last_history:
+            last_history.checkout = datetime.now()
+            last_history.save()
+
+        self.object.history.create(sector=self.object.sector, checkin=datetime.now())
+
+        return super(EquipmentChangeSectorView,self).form_valid(form)
+
     #Como a gente precisa passar o slug como parâmetro o sucess_url não funciona.
     def get_success_url(self):
         return reverse_lazy('equipments:detail',args=[self.object.equipment_type.slug])
 
 
 equipment_change_sector = EquipmentChangeSectorView.as_view()
+
+
+def equipment_history(request,pk):
+    context = {
+        'object':models.Equipment.objects.get(pk=pk)
+    }
+    # context = {
+    #     'object': {
+    #         'name': 'Ventilador Mecânico',
+    #         'patrimony': '12345',
+    #         'history': [
+    #             {
+    #                 'sector': 'CENTRO CIRÚRGICO',
+    #                 'checkin': '01/01/2017 00:01',
+    #                 'checkout': '--/--/---- --:--'
+    #             }, {
+    #                 'sector': 'UTI',
+    #                 'checkin': '02/01/2017 00:01',
+    #                 'checkout': '05/01/2017 10:20'
+    #             }, {
+    #                 'sector': 'CARDIOLOGIA',
+    #                 'checkin': '20/03/2017 00:01',
+    #                 'checkout': '21/04/2017 10:20'
+    #             },
+    #         ]
+    #     }
+    # }
+    return render(request,'equipments/history.html',context)
+

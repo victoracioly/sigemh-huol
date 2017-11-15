@@ -10,6 +10,7 @@
             <th>Número de Série</th>
             <th>Setor</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{ obj.patrimony }}</td>
                 <td>{{ obj.sector|default:"-" }}</td>
                 <td><a href="{% url 'equipments:change_sector' obj.pk %}">Editar Setor</a></td>
+                <td><a href="{% url 'equipments:history' obj.pk %}">Histórico</a></td>
             </tr>
         {% endfor %}
         </tbody>
