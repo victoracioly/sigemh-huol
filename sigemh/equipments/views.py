@@ -1,12 +1,14 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
-from django.views.generic import DeleteView
+
 from sigemh.core.views import BaseView
 from sigemh.equipments import models
-from django.shortcuts import render
+
 
 # Este método lista todos os objetos que eu tenho no banco que foram passados pelo modelo EquipmentType
 # Iniciamos com a listagem em texto, depois criamos as classes.
@@ -42,8 +44,8 @@ class EquipmentTypeBaseView(BaseView):
 class EquipmentTypeCreateView(EquipmentTypeBaseView, CreateView):
     pass
 
-
 equipment_type_create = EquipmentTypeCreateView.as_view()
+
 
 # Isso cria a modificação dos nomes.
 class EquipmentTypeUpdateView(EquipmentTypeBaseView, UpdateView):

@@ -42,6 +42,7 @@ class Equipment(ModelBase):
     def __str__(self):
         return '{} - {}'.format(self.equipment_type.name, self.patrimony)
 
+
 class EquipmentHistory(ModelBase):
     equipment = models.ForeignKey(Equipment,verbose_name='Equipamento',related_name='history')
     sector = models.ForeignKey(Sector, verbose_name='Setor')
@@ -49,3 +50,7 @@ class EquipmentHistory(ModelBase):
     checkout = models.DateTimeField(verbose_name='Dia/Hora - Saída', null=True, blank=True)
 
 
+    def diference(self):
+        if self.checkout:
+            return abs((self.checkout-self.checkin).days)
+        return '-'

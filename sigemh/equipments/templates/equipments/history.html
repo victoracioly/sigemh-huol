@@ -9,6 +9,7 @@
             <th>Setor</th>
             <th>Dia/Hora - Chegada</th>
             <th>Dia/Hora - Saída</th>
+            <th>Diferença</th>
         </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
             <td>{{ history.sector }}</td>
             <td>{{ history.checkin|date:'d/m/Y H:i' }}</td>
             <td>{{ history.checkout|date:'d/m/Y H:i'|default:'--/--/---- --:--' }}</td>
+            <td>{{ history.diference }}</td>
         </tr>
         {% endfor %}
         </tbody>
