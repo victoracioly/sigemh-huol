@@ -26,6 +26,11 @@ models.signals.pre_save.connect(signals.pre_save_equipment_type, sender=Equipmen
 
 class Equipment(ModelBase):
 
+    FUNCTION = (
+        ('loan','Empréstimo'),
+        ('transport','Transporte'),
+    )
+
     class Meta:
         verbose_name = 'Equipamento'
         verbose_name_plural = 'Equipamentos'
@@ -34,6 +39,7 @@ class Equipment(ModelBase):
     patrimony = models.CharField(verbose_name='Número de patrimônio', max_length=75, unique=True)
     serial_number = models.CharField(verbose_name='Número de série', max_length=75, unique=True)
     sector = models.ForeignKey(Sector, verbose_name='Setor', null=True, blank=True)
+    function = models.CharField(verbose_name='Função', max_length=9,choices=FUNCTION,default=FUNCTION[0][0])
 
     #Ordenando de forma correta:
     def get_history(self):

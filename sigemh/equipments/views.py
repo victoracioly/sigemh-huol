@@ -9,6 +9,8 @@ from django.views.generic import UpdateView
 from sigemh.core.views import BaseView
 from sigemh.equipments import models
 
+from django.db.models import Count
+
 
 # Este método lista todos os objetos que eu tenho no banco que foram passados pelo modelo EquipmentType
 # Iniciamos com a listagem em texto, depois criamos as classes.
@@ -16,6 +18,17 @@ class EquipmentTypeListView(BaseView, ListView):
 
     model = models.EquipmentType
     template_name = 'equipments/list.html'
+
+class EquipmentTypeTransportListView(EquipmentTypeListView):
+    def get_queryset(self):
+        from django.db.models import Count
+        return self.model.objects.filter(equipments__function='transport').distinct()#.aggregate(Count('quantity'))
+
+
+class EquipmentTypeLoanListView(EquipmentTypeListView):
+    def get_queryset(self):
+        from django.db.models import Count
+        return self.model.objects.filter(equipments__function='loan').distinct()#.aggregate(Count('quantity'))
 
 
 class EquipmentTypeDetailView(BaseView, DetailView):
@@ -47,7 +60,7 @@ class EquipmentTypeCreateView(EquipmentTypeBaseView, CreateView):
 equipment_type_create = EquipmentTypeCreateView.as_view()
 
 
-# Isso cria a modificação dos nomes.
+# Criando a modificação dos nomes.
 class EquipmentTypeUpdateView(EquipmentTypeBaseView, UpdateView):
     pass
 
@@ -58,24 +71,44 @@ class EquipmentTypeDeleteView(EquipmentTypeBaseView,DeleteView):
     model = models.EquipmentType
     template_name = 'equipments/delete.html'
     success_url = reverse_lazy('equipments:list')
+
 equipment_type_delete = EquipmentTypeDeleteView.as_view()
 
 
 #--------------------------------Criando os equipamentos
-
-class EquipmentCreateView(BaseView,CreateView,DetailView):
+# Colocando os parâmetros do models na classe EquipmentBaseView
+class EquipmentBaseView(BaseView,DetailView):
 
     model = models.Equipment
-    fields = ['equipment_type','patrimony','serial_number','sector']
+    fields = ['equipment_type', 'patrimony', 'serial_number', 'sector','function']
     template_name = 'equipments/form_equipment.html'
-    success_url = reverse_lazy('equipments:list')
 
-# Usamos este método da Class BaseView para relacionar foreingkey com PrimaryKey
+    def get_success_url(self):
+        return reverse_lazy('equipments:detail',args=[self.object.equipment_type.slug])
+
+
+class EquipmentCreateView(EquipmentBaseView,CreateView):
     def get_object(self, *args, **kwargs):
         from django.shortcuts import get_object_or_404
         return get_object_or_404(models.EquipmentType.objects.all(), pk=self.kwargs['pk'])
 
+    def get_form(self, form_class=None):
+        from django import forms
+
+        form_class = super(EquipmentCreateView, self).get_form()
+        form_class.fields['equipment_type'].initial = self.object
+        form_class.fields['equipment_type'].widget = forms.HiddenInput()
+
+        return form_class
+
 equipment_create = EquipmentCreateView.as_view()
+
+
+class EquipmentUpdateView(EquipmentBaseView, UpdateView):
+    #Permite editar somente os campos abaixo:
+    fields = ['patrimony', 'serial_number','function']
+
+equipment_update = EquipmentUpdateView.as_view()
 
 
 class EquipmentChangeSectorView(BaseView,UpdateView):
@@ -104,31 +137,10 @@ class EquipmentChangeSectorView(BaseView,UpdateView):
 
 equipment_change_sector = EquipmentChangeSectorView.as_view()
 
+# Histórico dos equipamentos:
+class EquipmentHistoryView(BaseView, DetailView):
+    model = models.Equipment
+    template_name = 'equipments/history.html'
 
-def equipment_history(request,pk):
-    context = {
-        'object':models.Equipment.objects.get(pk=pk)
-    }
-    # context = {
-    #     'object': {
-    #         'name': 'Ventilador Mecânico',
-    #         'patrimony': '12345',
-    #         'history': [
-    #             {
-    #                 'sector': 'CENTRO CIRÚRGICO',
-    #                 'checkin': '01/01/2017 00:01',
-    #                 'checkout': '--/--/---- --:--'
-    #             }, {
-    #                 'sector': 'UTI',
-    #                 'checkin': '02/01/2017 00:01',
-    #                 'checkout': '05/01/2017 10:20'
-    #             }, {
-    #                 'sector': 'CARDIOLOGIA',
-    #                 'checkin': '20/03/2017 00:01',
-    #                 'checkout': '21/04/2017 10:20'
-    #             },
-    #         ]
-    #     }
-    # }
-    return render(request,'equipments/history.html',context)
 
+equipment_history = EquipmentHistoryView.as_view()

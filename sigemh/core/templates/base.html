@@ -11,7 +11,7 @@
             crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-{#  <link rel="stylesheet" type="text/css" href="{% static 'css/recados.css' %}">  #}
+    {#  <link rel="stylesheet" type="text/css" href="{% static 'css/recados.css' %}">  #}
 </head>
 <body>
 
@@ -43,13 +43,19 @@
     {% block body %}
         <div class="col-md-12">
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="{% url 'equipments:list' %}">Equipamentos</a></li>
+                <li role="presentation"><a href="{% url 'equipments:transport_list' %}">Transporte</a></li>
+                <li role="presentation"><a href="{% url 'equipments:loan_list' %}">Empréstimo</a></li>
                 <li role="presentation"><a href="{% url 'sectors:list' %}">Setores</a></li>
-                <li role="presentation"><a href="{% url 'functionaries:list' %}">Funcionarios</a></li>
+                <li role="presentation"><a href="{% url 'equipments:list' %}">Equipamentos</a></li>
             </ul>
         </div>
         {% block content %}{% endblock content %}
     {% endblock body %}
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            ...
+        </div>
+    </nav>
 </div>
 
 <script

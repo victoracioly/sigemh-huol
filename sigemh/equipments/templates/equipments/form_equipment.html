@@ -1,20 +1,23 @@
 {% extends "base.html"%}
 
 {% block content %}
-  <div class="col-md-4">
-    <form method="POST">
-      {% csrf_token %}
-      {% include "form_error.html" %}
+    <div class="col-md-4">
+        <form method="POST">
+            {% csrf_token %}
+            {% include "form_error.html" %}
 
-      <div class="form-group">{% include "field.html" with field=form.equipment_type %}</div>
-      <div class="form-group">{% include "field.html" with field=form.patrimony %}</div>
-        <div class="form-group">{% include "field.html" with field=form.serial_number %}</div>
-        <div class="form-group">{% include "field.html" with field=form.sector %}</div>
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                <div class="form-group">{% include "field.html" with field=field %}</div>
+            {% endfor %}
 
-
-
-      <p class="text-muted">*Campos obrigatórios</p>
-      <p><button type="submit" class="btn btn-primary">Salvar</button></p>
-    </form>
-  </div>
+            <p class="text-muted">*Campos obrigatórios</p>
+            <p><button type="submit" class="btn btn-primary">Salvar</button></p>
+        </form>
+    </div>
 {% endblock content %}
+
+
+

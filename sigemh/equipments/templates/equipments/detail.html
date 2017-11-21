@@ -9,6 +9,8 @@
             <th>Patrimônio</th>
             <th>Número de Série</th>
             <th>Setor</th>
+            <th>Função</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -19,7 +21,9 @@
                 <td>{{ obj.serial_number }}</td>
                 <td>{{ obj.patrimony }}</td>
                 <td>{{ obj.sector|default:"-" }}</td>
-                <td><a href="{% url 'equipments:change_sector' obj.pk %}">Editar Setor</a></td>
+                <td>{{ obj.get_function_display }}</td>
+                <td><a href="{% url 'equipments:update_equipment' obj.pk %}">Editar Equipamento</a></td>
+                <td><a href="{% url 'equipments:change_sector' obj.pk %}">Mover de Setor</a></td>
                 <td><a href="{% url 'equipments:history' obj.pk %}">Histórico</a></td>
             </tr>
         {% endfor %}
