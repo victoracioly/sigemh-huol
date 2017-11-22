@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{% url 'equipments:create' %}" class="btn btn-primary">Adicionar Tipo de Equipamento</a>
+    {% if new %}
+        <a href="{% url 'equipments:create' %}" class="btn btn-primary">Adicionar Tipo de Equipamento</a>
+    {% endif %}
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -14,10 +16,10 @@
         <tbody>
         {% for obj in object_list %}
             <tr>
-                    <td><a href="{% url 'equipments:detail' obj.slug %}">{{ obj.name }}</a></td>
-                    <td>{{ obj.quantity }}</td>
-                    <td><a href="{% url 'equipments:update' obj.pk %}">Editar</a></td>
-                    <td><a href="{% url 'equipments:delete' obj.pk %}">Excluir</a></td>
+                <td><a href="{% url 'equipments:detail' obj.slug %}">{{ obj.name }}</a></td>
+                <td>{{ obj.quantity }}</td>
+                <td><a href="{% url 'equipments:update' obj.pk %}">Editar</a></td>
+                <td><a href="{% url 'equipments:delete' obj.pk %}">Excluir</a></td>
             </tr>
         {% endfor %}
         </tbody>

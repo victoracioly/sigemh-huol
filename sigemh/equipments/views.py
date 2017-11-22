@@ -16,16 +16,34 @@ from django.db.models import Count
 # Iniciamos com a listagem em texto, depois criamos as classes.
 class EquipmentTypeListView(BaseView, ListView):
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['new'] = True
+        return context
+
     model = models.EquipmentType
     template_name = 'equipments/list.html'
 
 class EquipmentTypeTransportListView(EquipmentTypeListView):
+
+    #Método para
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['new'] = False
+        return context
+
     def get_queryset(self):
         from django.db.models import Count
         return self.model.objects.filter(equipments__function='transport').distinct()#.aggregate(Count('quantity'))
 
 
 class EquipmentTypeLoanListView(EquipmentTypeListView):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['new'] = False
+        return context
+
     def get_queryset(self):
         from django.db.models import Count
         return self.model.objects.filter(equipments__function='loan').distinct()#.aggregate(Count('quantity'))
