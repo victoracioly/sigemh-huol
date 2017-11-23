@@ -26,7 +26,7 @@ class EquipmentTypeListView(BaseView, ListView):
 
 class EquipmentTypeTransportListView(EquipmentTypeListView):
 
-    #Método para
+    #Tirando botão 'Adicionar' de Transporte
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['new'] = False
@@ -39,6 +39,7 @@ class EquipmentTypeTransportListView(EquipmentTypeListView):
 
 class EquipmentTypeLoanListView(EquipmentTypeListView):
 
+    #Tirando botão 'Adicionar' de Empreśtimo
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['new'] = False
