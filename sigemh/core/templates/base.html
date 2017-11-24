@@ -25,6 +25,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{% url 'equipments:list' %}">SIGEMH - Sistema de Gestão de Equipamentos Médico-Hospitalares</a>
+
         </div>
         <div class="collapse navbar-collapse" id="menu-githubstars">
             <ul class="nav navbar-nav navbar-right">
@@ -51,13 +52,15 @@
         </div>
         {% block content %}{% endblock content %}
     {% endblock body %}
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <ul class="nav-image">
-            <div class="container">
-                <img src="{% static "image/logotipo-huolufrn.png" %}" alt="My image"/>
-                <img src="{% static "image/logotipo-ebserh.png" %}" alt="My image"/>
-            </div>
-    </nav>
+
+{#    <div class="col-md-12">#}
+{#        <ul class="na nav-tabs">#}
+        
+        <img src="{% static "image/logotipo-huolufrn.png" %}" alt="My image"/>
+        <img src="{% static "image/logotipo-ebserh.png" %}" alt="My image"/>
+{#        </ul>#}
+{#    </div>#}
+
 </div>
 
 <script

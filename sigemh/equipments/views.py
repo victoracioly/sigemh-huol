@@ -95,11 +95,11 @@ equipment_type_delete = EquipmentTypeDeleteView.as_view()
 
 
 #--------------------------------Criando os equipamentos
-# Colocando os parâmetros do models na classe EquipmentBaseView
+# Classe que mostra os atributos do equipamento
 class EquipmentBaseView(BaseView,DetailView):
 
     model = models.Equipment
-    fields = ['equipment_type', 'patrimony', 'serial_number', 'sector','function']
+    fields = ['manufacturer','equipment_model','equipment_type', 'patrimony', 'serial_number','year_of_manufacture','function', 'sector']
     template_name = 'equipments/form_equipment.html'
 
     def get_success_url(self):
@@ -125,8 +125,9 @@ equipment_create = EquipmentCreateView.as_view()
 
 class EquipmentUpdateView(EquipmentBaseView, UpdateView):
     #Permite editar somente os campos abaixo:
-    fields = ['patrimony', 'serial_number','function']
-
+    #fields = ['patrimony', 'serial_number','function']
+    fields = ['manufacturer', 'equipment_model', 'equipment_type', 'patrimony', 'serial_number', 'year_of_manufacture',
+              'function', 'sector']
 equipment_update = EquipmentUpdateView.as_view()
 
 

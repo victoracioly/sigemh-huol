@@ -7,6 +7,8 @@
         <thead>
         <tr>
             <th></th>
+            <th></th>
+            <th></th>
             <th>Patrimônio</th>
             <th>Número de Série</th>
             <th>Setor</th>
@@ -19,6 +21,8 @@
         {% for obj in object.equipments.all %}
             <tr>
                 <td><a href="{% url 'equipments:update_equipment' obj.pk %}">Editar</a></td>
+                <td>{{ obj.manufacturer|default:"-"  }}</td>
+                <td>{{ obj.equipment_model|default:"-"  }}</td>
                 <td>{{ obj.serial_number }}</td>
                 <td>{{ obj.patrimony }}</td>
                 <td>{{ obj.sector|default:"-" }}</td>
