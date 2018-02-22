@@ -29,7 +29,7 @@ class EquipmentTypeTransportListView(EquipmentTypeListView):
     #Tirando botão 'Adicionar' de Transporte
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['new'] = True
+        context['new'] = False
         return context
 
     def get_queryset(self):
@@ -42,7 +42,7 @@ class EquipmentTypeLoanListView(EquipmentTypeListView):
     #Tirando botão 'Adicionar' de Empreśtimo
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['new'] = True
+        context['new'] = False
         return context
 
     def get_queryset(self):

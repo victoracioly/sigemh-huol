@@ -40,7 +40,7 @@ class Equipment(ModelBase):
     serial_number = models.CharField(verbose_name='Número de série', max_length=75, unique=True)
     sector = models.ForeignKey(Sector, verbose_name='Setor', null=True, blank=True)
     function = models.CharField(verbose_name='Função', max_length=9,choices=FUNCTION,default=FUNCTION[0][0])
-    year_of_manufacture = models.CharField(verbose_name='Ano de fabricação', max_length=4, null=True, blank=False)
+    year_of_manufacture = models.CharField(verbose_name='Ano de fabricação', max_length=4, null=True, blank=True)
     manufacturer = models.CharField(verbose_name='Fabricante', max_length=20, null=True, blank=True)
     equipment_model = models.CharField(verbose_name='Modelo', max_length=75, null=True, blank=True)
 #    information = models.TextField(verbose_name='Modelo', max_length=75, null=True, blank=True)

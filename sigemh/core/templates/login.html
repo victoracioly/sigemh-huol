@@ -1,6 +1,10 @@
 {% extends "base.html"%}
+{% load staticfiles %}
+{% load static %}
 
 {% block body %}
+<img src="{% static "image/logotipo-huolufrn.png" %}" alt="My image"/>
+<img src="{% static "image/logotipo-ebserh.png" %}" alt="My image"/>
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -20,4 +24,5 @@
       </div>
     </div>
   </div>
+
 {% endblock body %}
