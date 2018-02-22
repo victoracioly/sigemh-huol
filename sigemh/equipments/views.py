@@ -29,7 +29,7 @@ class EquipmentTypeTransportListView(EquipmentTypeListView):
     #Tirando botão 'Adicionar' de Transporte
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['new'] = False
+        context['new'] = True
         return context
 
     def get_queryset(self):
@@ -42,7 +42,7 @@ class EquipmentTypeLoanListView(EquipmentTypeListView):
     #Tirando botão 'Adicionar' de Empreśtimo
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['new'] = False
+        context['new'] = True
         return context
 
     def get_queryset(self):
@@ -134,7 +134,7 @@ equipment_update = EquipmentUpdateView.as_view()
 class EquipmentChangeSectorView(BaseView,UpdateView):
 
     model = models.Equipment
-    fields = ['sector']
+    fields = ['sector','order_of_service']
     template_name = 'equipments/change_sector.html'
 
     def form_valid(self, form):

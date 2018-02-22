@@ -6,9 +6,8 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Fabricante</th>
+            <th>Modelo</th>
             <th>Patrimônio</th>
             <th>Número de Série</th>
             <th>Setor</th>
@@ -20,7 +19,9 @@
         <tbody>
         {% for obj in object.equipments.all %}
             <tr>
+                <!-- Retirando a função de editar equipamento pelo sistema
                 <td><a href="{% url 'equipments:update_equipment' obj.pk %}">Editar</a></td>
+                -->
                 <td>{{ obj.manufacturer|default:"-"  }}</td>
                 <td>{{ obj.equipment_model|default:"-"  }}</td>
                 <td>{{ obj.serial_number }}</td>

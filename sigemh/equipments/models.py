@@ -40,9 +40,11 @@ class Equipment(ModelBase):
     serial_number = models.CharField(verbose_name='Número de série', max_length=75, unique=True)
     sector = models.ForeignKey(Sector, verbose_name='Setor', null=True, blank=True)
     function = models.CharField(verbose_name='Função', max_length=9,choices=FUNCTION,default=FUNCTION[0][0])
-    year_of_manufacture = models.CharField(verbose_name='Ano de fabricação', max_length=4, null=True, blank=True)
+    year_of_manufacture = models.CharField(verbose_name='Ano de fabricação', max_length=4, null=True, blank=False)
     manufacturer = models.CharField(verbose_name='Fabricante', max_length=20, null=True, blank=True)
     equipment_model = models.CharField(verbose_name='Modelo', max_length=75, null=True, blank=True)
+#    information = models.TextField(verbose_name='Modelo', max_length=75, null=True, blank=True)
+    order_of_service = models.CharField(verbose_name='Ordem de Serviço', max_length=75, null=True, blank=True)
 
     #Ordenando de forma correta:
     def get_history(self):
@@ -58,8 +60,7 @@ class EquipmentHistory(ModelBase):
     checkin = models.DateTimeField(verbose_name='Dia/Hora - Chegada',auto_now_add=True)
     checkout = models.DateTimeField(verbose_name='Dia/Hora - Saída', null=True, blank=True)
 
-
     def diference(self):
         if self.checkout:
-            return abs((self.checkout-self.checkin).days)
+            return abs((self.checkout-self.checkin).seconds/60)
         return '-'

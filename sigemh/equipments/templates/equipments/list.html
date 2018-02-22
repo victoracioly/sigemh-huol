@@ -8,9 +8,8 @@
         <thead>
         <tr>
             <th>Nome</th>
-            <th>Quantidade</th>
-            <th></th>
-            <th></th>
+            <th>Total de Equipamentos</th>
+            <th>Disponíveis na Central </th>
         </tr>
         </thead>
         <tbody>
@@ -18,8 +17,11 @@
             <tr>
                 <td><a href="{% url 'equipments:detail' obj.slug %}">{{ obj.name }}</a></td>
                 <td>{{ obj.quantity }}</td>
+                <!--
                 <td><a href="{% url 'equipments:update' obj.pk %}">Editar</a></td>
                 <td><a href="{% url 'equipments:delete' obj.pk %}">Excluir</a></td>
+                -->
+                <td></td>
             </tr>
         {% endfor %}
         </tbody>

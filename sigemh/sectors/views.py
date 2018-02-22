@@ -53,3 +53,6 @@ class SectorDeleteView(BaseView, DeleteView):
 
 
 sector_delete = SectorDeleteView.as_view()
+
+
+

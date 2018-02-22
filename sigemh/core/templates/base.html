@@ -46,8 +46,10 @@
             <ul class="nav nav-tabs">
                 <li role="presentation"><a href="{% url 'equipments:transport_list' %}">Transporte</a></li>
                 <li role="presentation"><a href="{% url 'equipments:loan_list' %}">Empréstimo</a></li>
+                <!--
                 <li role="presentation"><a href="{% url 'sectors:list' %}">Setores</a></li>
                 <li role="presentation"><a href="{% url 'equipments:list' %}">Equipamentos</a></li>
+                -->
             </ul>
         </div>
         {% block content %}{% endblock content %}
@@ -55,7 +57,7 @@
 
 {#    <div class="col-md-12">#}
 {#        <ul class="na nav-tabs">#}
-        
+
         <img src="{% static "image/logotipo-huolufrn.png" %}" alt="My image"/>
         <img src="{% static "image/logotipo-ebserh.png" %}" alt="My image"/>
 {#        </ul>#}
