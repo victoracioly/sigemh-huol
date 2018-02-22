@@ -80,7 +80,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'sigemh.wsgi.application'
 
 LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('equipments:list')
+LOGIN_REDIRECT_URL = reverse_lazy('equipments:loan_list')
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
